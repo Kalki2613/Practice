@@ -1,0 +1,38 @@
+3 qtn 
+
+a) SELECT P.Name, T.Team_Name, P.Age
+FROM Player P
+JOIN Team T ON P.Teamid = T.Teamid
+ORDER BY P.Age ASC
+LIMIT 1;
+
+b)SELECT S.*
+FROM Stadium S
+JOIN Match M ON S.Stadiumid = M.Stadiumid
+GROUP BY S.Stadiumid
+ORDER BY COUNT(M.Matchid) DESC
+LIMIT 1;
+
+c)SELECT P.*
+FROM Player P
+JOIN Match M ON P.Playerid = M.Man_of_the_Matchid
+WHERE P.Playerid NOT IN (SELECT Captainid FROM Team)
+GROUP BY P.Playerid
+HAVING COUNT(M.Matchid) >= 2;
+
+d)SELECT T.*
+FROM Team T
+JOIN Match M ON T.Teamid = M.Winner_Teamid
+GROUP BY T.Teamid
+ORDER BY COUNT(M.Matchid) DESC
+LIMIT 1;
+
+
+e)SELECT T.Team_Name
+FROM Team T
+JOIN Match M ON T.Teamid = M.Winner_Teamid
+GROUP BY M.Stadiumid
+HAVING COUNT(DISTINCT T.Teamid) = (SELECT COUNT(*) FROM Team);
+
+
+f
