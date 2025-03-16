@@ -1,5 +1,42 @@
 3 qtn 
 
+1)Team 
+
+create table team(
+tid varchar(10) primarykey, tname varchar(10), city varchar(15), coach varchar(10),cid varchar(10));
+
+insert into team values('T001','INDIA','MUMBAI','CLARK','PA01');
+
+2)Player phone
+
+create table playerphone(
+pid varchar(10),phone number(10),
+foreign key(pid)references player(pid));
+
+ insert into playerphone values('PA01','9465723115');
+
+3)player 
+
+create table player( 
+pid varchar(10) primarykey, pname varchar(10), age int(3), tid varchar(10),foreign key(tid) references team(tid));
+
+insert into player values('PA01','KHOLI',25,'T001');
+
+4)stadium
+
+create table stadium(stid varchar(10) primarykey, stname varchar(10),city varchar(10), area varchar(10),pin varchar(6));
+
+insert into stadium values('S001','INDIA','MUMBAI','SAHPA','509103');
+
+5)matches
+
+create table matches(mid varchar(10) primary key,mdate date,time int(5,2),
+stid varchar(10), tid1 varchar(10), tid2 varchar(10), mom varchar(10), winnerid varchar(10), foreign key(stid) references stadium(stid),
+foreign key(tid1) references team(tid), foreign key(tid2) references team(tid), foreignkey(winnerid)references team(tid), foreignkey(mom)references player(pid));
+
+insert into matches values('M1','11-DEC-16','3.00','S001','T001','T002','PA01','T001');
+
+
 a) SELECT P.Name, T.Team_Name, P.Age
 FROM Player P
 JOIN Team T ON P.Teamid = T.Teamid
@@ -35,4 +72,4 @@ GROUP BY M.Stadiumid
 HAVING COUNT(DISTINCT T.Teamid) = (SELECT COUNT(*) FROM Team);
 
 
-f
+
